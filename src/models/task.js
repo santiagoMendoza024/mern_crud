@@ -1,10 +1,10 @@
 // Lo requerimos para modelar los datos
 const mongoose = require('mongoose');
 
-// requerimos solo el esquema desde mongoose 
+// requerimos solo el Schema desde mongoose 
 const { Schema } = mongoose;
 
-// el esquema nos permite definir el esquema de los datos (propiedades)
+// el Schema nos permite definir el esquema de los datos (propiedades)
 const TaskSchema = new Schema({
     title: { type: String, required: true},
     description: {type: String, required: true}
