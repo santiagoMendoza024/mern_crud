@@ -19,6 +19,7 @@ class App extends Component {
     //1-funcion para agregar tareas nuevas
     addTask(e){
         // console.log(this.state);
+        // Si el estado trae algun id hace la operacion de actualizar
         if(this.state._id){
             fetch(`/api/tasks/${this.state._id}`,{
                 method:'PUT',
@@ -31,12 +32,15 @@ class App extends Component {
             })
             .then(res=> res.json())
             .then(data => {
+                //mandamos un mensaje
                 M.toast({html: data.status});
+                //limpiamos el estado
                 this.setState({title: '', description: '', _id: ''})
+                //buscamos las tareas
                 this.fetchTasks();
             })
         }else{
-            //Aqui hacemos nuestra peticion a la api 
+            //Aqui hacemos nuestra peticion a la api para ingresar una nueva tarea
             fetch('/api/tasks',{
                 method: 'POST',
                 //le mandamos los datos que que digito el usuario 
@@ -49,22 +53,23 @@ class App extends Component {
             })
             // aqui nos regresa el mensaje la api
             .then(res => res.json())
-            //
+            // 
             .then(data => {
                 console.log(data);
                 //mostrar mensaje
                 M.toast({html: data.status});
                 //limpiar el formulario
                 this.setState({title:'', description:''});
+                //buscamos las tareas
                 this.fetchTasks();
             })
             .catch(err => console.log(err));
         }
-        //evita que se refresque
+        //evita que se refresque 
         e.preventDefault();
     }
 
-    //
+    // Sirve para montar el componente
     componentDidMount(){
         console.log('componente fue montado')
         //con esto apenas inicie el servidor vamos a traer todas las tareas
@@ -85,6 +90,7 @@ class App extends Component {
     }
     /// delete
     deleteTask(id){
+        //Confirmamos si quiere eliminar
         if(confirm('Are you sure you want to delete it?')){
             fetch(`/api/tasks/${id}`,{
                 method: 'DELETE',
@@ -95,7 +101,9 @@ class App extends Component {
             })
             .then(res => res.json())
             .then(data => {
+                //Muestra mensaje
                 M.toast({html: data.status})
+                //vuelve a buscar
                 this.fetchTasks();
             });
         }
@@ -127,13 +135,13 @@ class App extends Component {
     render(){
         return(
             <div>
-                {/* NAVIGATION*/}
+                {/* Barra de navegacion NAVIGATION*/}
                 <nav className="light-blue darken-4">
                     <div className="container">
                         <a className="brand-logo" href="/">MERN stack</a>
                     </div>
                 </nav>
-
+                {/**Contenedor principal */}
                 <div className="container">
                     <div className="row">
                         <div className="col s5">
@@ -154,6 +162,7 @@ class App extends Component {
 
                                         <div className="row">
                                             <div className="input-field col s12">
+                                                {/** onchangue nos sirve para capturar los datos tecleados */}
                                                 <textarea name="description" onChange={this.handleChange} placeholder="Task Description" className="materialize-textarea" value={this.state.description}>
 
                                                 </textarea>
