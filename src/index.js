@@ -21,7 +21,7 @@ const app = express();
 // 'port' es el nombre de la variable
 // process.env.PORT sirve para que tome el puerto del sistema operativo que esta configurado 
 // || o que tome el pueto que nosotros le asignemos
-app.set('port', 3000);
+app.set('port', 80);
 
 /* 
    -> Middlewares
@@ -58,8 +58,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // app.get('port') | aqui obtenemos el valor del puerto
 
- app.listen(app.get('port'), () => {
+ app.listen(app.get(443), () => {
     //la funcion se utiliza para ejecutar algo
     // solo para desarrollo
     console.log(`Server on port ${app.get('port')}`);
+
  });
