@@ -21,7 +21,7 @@ const app = express();
 // 'port' es el nombre de la variable
 // process.env.PORT sirve para que tome el puerto del sistema operativo que esta configurado 
 // || o que tome el pueto que nosotros le asignemos
-app.set('port', process.env.PORT || 420);
+app.set('port', process.env.PORT);
 
 /* 
    -> Middlewares
